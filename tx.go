@@ -1,16 +1,5 @@
 package txd
 
-import (
-	"speter.net/go/exp/math/dec/inf"
-)
-
-type Currency [3]byte
-
-type Amount struct {
-	Value    *inf.Dec
-	Currency Currency
-}
-
 type Send struct {
 	CreatedAt int64
 	From      int64
@@ -25,7 +14,7 @@ type OfferCancel struct {
 }
 
 const (
-	TX_SEND = iota
+	TX_SEND_TO = iota
 	TX_OFFER_CREATE
 	TX_OFFER_CANCEL
 )

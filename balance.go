@@ -6,6 +6,10 @@ import (
 
 type Balance map[Currency]Amount
 
+func NewBalance() Balance {
+	return make(Balance)
+}
+
 func (balance Balance) Get(currency Currency) Amount {
 	if amount, ok := balance[currency]; ok {
 		return amount
