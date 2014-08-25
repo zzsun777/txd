@@ -12,14 +12,14 @@ An order matching engine written in go.
 ### SendTo
 
 ```JSON
-  {
-    "From": 100,
-    "To": 101,
-    "Amount": {
-      "Currency": "BTC",
-      "Value": "0.1"
-    }
+{
+  "From": 100,
+  "To": 101,
+  "Amount": {
+    "Currency": "BTC",
+    "Value": "0.1"
   }
+}
 ```
 
 ### CreateOrder
