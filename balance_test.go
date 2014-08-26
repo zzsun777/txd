@@ -24,3 +24,12 @@ func TestIncBalance(t *testing.T) {
 		t.Error()
 	}
 }
+
+func TestDecBalance(t *testing.T) {
+	b := txd.NewBalance()
+	dec := txd.NewAmount("BTC", -2, 1)
+	b.Inc(dec)
+	if !b.Get(btc).Equal(txd.NewAmount("BTC", -2, 1)) {
+		t.Error()
+	}
+}

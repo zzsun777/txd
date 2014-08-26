@@ -10,6 +10,10 @@ func TestNewAmount(t *testing.T) {
 	if amount.String() != "1.23BTC" {
 		t.Error()
 	}
+	amount = txd.NewAmount("BTC", -123, 2)
+	if amount.String() != "-1.23BTC" {
+		t.Error()
+	}
 }
 
 func TestAmountEqual(t *testing.T) {
