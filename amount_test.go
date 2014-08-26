@@ -32,3 +32,26 @@ func TestAmountEqual(t *testing.T) {
 		t.Error()
 	}
 }
+
+func TestAmountNeg(t *testing.T) {
+	a := txd.NewAmount("BTC", 12, 3)
+	a.Neg()
+	if !a.Equal(txd.NewAmount("BTC", -12, 3)) {
+		t.Error()
+	}
+	a.Neg()
+	if !a.Equal(txd.NewAmount("BTC", 12, 3)) {
+		t.Error()
+	}
+}
+
+func TestAmountCmp(t *testing.T) {
+	a := txd.NewAmount("BTC", 23, 4)
+	b := txd.NewAmount("BTC", 22, 4)
+	if !(a.Cmp(b) > 0) {
+		t.Error()
+	}
+	if !(a.Cmp(a) == 0) {
+		t.Error()
+	}
+}

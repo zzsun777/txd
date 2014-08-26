@@ -30,3 +30,11 @@ func (amount Amount) String() string {
 func (this Amount) Equal(another Amount) bool {
 	return this.Currency == another.Currency && this.Value.Cmp(another.Value) == 0
 }
+
+func (amount Amount) Neg() {
+	amount.Value.Neg(amount.Value)
+}
+
+func (this Amount) Cmp(another Amount) int {
+	return this.Value.Cmp(another.Value)
+}

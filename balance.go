@@ -1,7 +1,12 @@
 package txd
 
 import (
+	"errors"
 	"speter.net/go/exp/math/dec/inf"
+)
+
+var (
+	NoEnoughBalance = errors.New("no enough balance")
 )
 
 type Balance map[Currency]Amount
@@ -30,6 +35,14 @@ func (balance Balance) Inc(amount Amount) Amount {
 
 type Balances map[int64]Balance
 
-func (blances Balances) SendTo(from int64, to int64) {
-
+func (balances Balances) SendTo(from int64, to int64, amount Amount) error {
+	// send money to another account
+	var ok bool
+	if _, ok = balances[from]; !ok {
+		return NoEnoughBalance
+	}
+	if _, ok = balances[to]; !ok {
+		balances[to] = NewBalance()
+	}
+	return nil
 }
