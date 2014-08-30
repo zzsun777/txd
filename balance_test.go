@@ -33,3 +33,9 @@ func TestDecBalance(t *testing.T) {
 		t.Error()
 	}
 }
+
+func TestSendTo(t *testing.T) {
+	balances := make(txd.Balances)
+	balances[1] = txd.NewBalance()
+	println(balances)
+}

@@ -49,5 +49,8 @@ func (balances Balances) SendTo(from int64, to int64, amount Amount) error {
 	if balances[from].Get(amount.Currency).Cmp(amount) < 0 {
 		return NoEnoughBalance
 	}
+	balances[to].Inc(amount)
+	amount.Neg()
+	balances[from].Inc(amount)
 	return nil
 }
