@@ -5,13 +5,17 @@ import (
 	"github.com/aisk/txd/plaintext"
 	"os"
 	"path"
+	"strconv"
 	"testing"
 	"time"
 )
 
 var (
-	filePath = path.Join(os.TempDir(), "store"+time.Now().String())
-	datas    = [][]byte{
+	filePath = path.Join(
+		os.TempDir(),
+		strconv.Itoa(int(time.Now().Unix()))+"_store.txt",
+	)
+	datas = [][]byte{
 		[]byte("foo"),
 		[]byte("bar"),
 		[]byte("baz"),
