@@ -37,5 +37,29 @@ func TestDecBalance(t *testing.T) {
 func TestSendTo(t *testing.T) {
 	balances := make(txd.Balances)
 	balances[1] = txd.NewBalance()
-	println(balances)
+	amount := txd.NewAmount("BTC", 2, 2)
+	balances[1].Inc(amount)
+
+	err := balances.SendTo(1, 2, txd.NewAmount("BTC", 3, 1))
+	if err != txd.NoEnoughBalance {
+		t.Error()
+	}
+	if !balances[1].Get(txd.NewCurrency("BTC")).Equal(txd.NewAmount("BTC", 2, 2)) {
+		t.Error()
+	}
+	if !balances[2].Get(txd.NewCurrency("BTC")).Equal(txd.NewAmount("BTC", 0, 0)) {
+		t.Error()
+	}
+
+	err = balances.SendTo(1, 2, txd.NewAmount("BTC", 1, 2))
+	if err != nil {
+		t.Error()
+	}
+	if !balances[1].Get(txd.NewCurrency("BTC")).Equal(txd.NewAmount("BTC", 1, 2)) {
+		t.Error()
+	}
+
+	if !balances[2].Get(txd.NewCurrency("BTC")).Equal(txd.NewAmount("BTC", 1, 2)) {
+		t.Error()
+	}
 }

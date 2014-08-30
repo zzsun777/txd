@@ -26,11 +26,10 @@ func (balance Balance) Get(currency Currency) Amount {
 func (balance Balance) Inc(amount Amount) Amount {
 	currency := amount.Currency
 
-	if _, ok := balance[currency]; ok {
-		balance[currency].Value.Add(balance[currency].Value, amount.Value)
-	} else {
-		balance[currency] = amount
+	if _, ok := balance[currency]; !ok {
+		balance[currency] = Amount{Currency: currency, Value: inf.NewDec(0, 0)}
 	}
+	balance[currency].Value.Add(balance[currency].Value, amount.Value)
 	return balance[currency]
 }
 
